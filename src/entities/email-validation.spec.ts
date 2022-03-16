@@ -40,4 +40,14 @@ describe('Email validation', () => {
     const email = 'any@' + 'd'.repeat(64) + '.com'
     expect(Email.validate(email)).toBeFalsy()
   })
+
+  test('should not accept local part with invalid char', () => {
+    const email = 'any email@mail.com'
+    expect(Email.validate(email)).toBeFalsy()
+  })
+
+  test('should not accept domain part with invalid char', () => {
+    const email = 'anyemail@ma il.com'
+    expect(Email.validate(email)).toBeFalsy()
+  })
 })
