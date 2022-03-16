@@ -1,5 +1,7 @@
 API Requiriments
 
 1. Register user on mailing list
+  - e-mail must be valid
+  - mame must bem valid
 2. E-mail user with bonus
 
