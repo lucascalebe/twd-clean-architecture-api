@@ -1,4 +1,4 @@
-import { Either, left } from './../shared/either'
+import { Either, left, right } from './../shared/either'
 import { InvalidEmailError } from './errors/invalid-email-error'
 export class Email {
   public readonly value: string
@@ -45,7 +45,4 @@ export class Email {
 
     return true
   }
-}
-function right (arg0: Email): Either<InvalidEmailError, Email> {
-  throw new Error('Function not implemented.')
 }
