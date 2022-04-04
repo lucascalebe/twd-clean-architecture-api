@@ -1,13 +1,13 @@
+import { UseCase } from '@/usecases/ports'
 import { MissingParamError } from '@/web-controllers/errors/missing-param-error'
 import { UserData } from '@/entities'
 import { HttpRequest, HttpResponse } from '@/web-controllers/ports'
-import { RegisterUserOnMailingList } from '@/usecases/register-user-on-mailing-list'
 import { badRequest, created } from '@/web-controllers/util'
 
 export class RegisterUserController {
-  private readonly usecase: RegisterUserOnMailingList
+  private readonly usecase: UseCase
 
-  constructor (usecase: RegisterUserOnMailingList) {
+  constructor (usecase: UseCase) {
     this.usecase = usecase
   }
 
@@ -19,7 +19,7 @@ export class RegisterUserController {
     }
 
     const userData: UserData = request.body
-    const response = await this.usecase.registerUserOnMailingList(userData)
+    const response = await this.usecase.perform(userData)
 
     if (response.isLeft()) {
       return badRequest(response.value)
