@@ -15,6 +15,14 @@ describe('Register user web controller', () => {
   const usecase: UseCase = new RegisterUserOnMailingList(repo)
   const controller: RegisterUserController = new RegisterUserController(usecase)
 
+  class ErrorThrowingUseCaseStub implements UseCase {
+    perform (request: any): Promise<any> {
+      throw Error()
+    }
+  }
+
+  const errorThrowingUseCaseStub: UseCase = new ErrorThrowingUseCaseStub()
+
   test('should return status code 201 when request contains valid user data', async () => {
     const request: HttpRequest = {
       body: {
@@ -94,6 +102,7 @@ describe('Register user web controller', () => {
           email: 'any@email.com'
         }
       }
+      const controller: RegisterUserController = new RegisterUserController(errorThrowingUseCaseStub)
       const response: HttpResponse = await controller.handle(request)
       expect(response.statusCode).toEqual(500)
       expect(response.body).toBeInstanceOf(Error)
