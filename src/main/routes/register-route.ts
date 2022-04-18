@@ -1,4 +1,4 @@
-import { adptRoute } from '@/main/config/adapters/'
+import { adptRoute } from '@/main/adapters'
 import { Router } from 'express'
 import { makeRegisterUserController } from '@/main/factories/'
 
