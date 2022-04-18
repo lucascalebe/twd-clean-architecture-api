@@ -1,7 +1,7 @@
 import { MissingParamError } from '@/web-controllers/errors/missing-param-error'
 import { InvalidEmailError, InvalidNameError } from '@/entities/errors'
 import { UserData } from '@/entities'
-import { InMemoryUserRepository } from '@test/usecases/register-user-on-mailing-list/repository'
+import { InMemoryUserRepository } from '@/usecases/register-user-on-mailing-list/repository'
 import { UserRepository } from '@/usecases/register-user-on-mailing-list/ports'
 import { RegisterUserOnMailingList } from '@/usecases/register-user-on-mailing-list'
 import { HttpRequest, HttpResponse } from '@/web-controllers/ports/'
