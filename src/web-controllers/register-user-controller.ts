@@ -1,3 +1,4 @@
+import { serverError } from '@/web-controllers/util/http-helper'
 import { UseCase } from '@/usecases/ports'
 import { MissingParamError } from '@/web-controllers/errors/missing-param-error'
 import { UserData } from '@/entities'
@@ -12,21 +13,23 @@ export class RegisterUserController {
   }
 
   public async handle (request: HttpRequest): Promise<HttpResponse> {
-    if (!(request.body.name) || !(request.body.email)) {
-      let missingParam = !(request.body.name) ? 'name ' : ''
-      missingParam += !(request.body.email) ? 'email' : ''
-      return badRequest(new MissingParamError(missingParam.trim()))
-    }
+    try {
+      if (!(request.body.name) || !(request.body.email)) {
+        let missingParam = !(request.body.name) ? 'name ' : ''
+        missingParam += !(request.body.email) ? 'email' : ''
+        return badRequest(new MissingParamError(missingParam.trim()))
+      }
 
-    const userData: UserData = request.body
-    const response = await this.usecase.perform(userData)
+      const userData: UserData = request.body
+      const response = await this.usecase.perform(userData)
 
-    if (response.isLeft()) {
-      return badRequest(response.value)
-    }
+      if (response.isLeft()) {
+        return badRequest(response.value)
+      }
 
-    if (response.isRight()) {
       return created(response.value)
+    } catch (error) {
+      return serverError(error)
     }
   }
 }
