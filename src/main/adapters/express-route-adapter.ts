@@ -1,8 +1,8 @@
 import { HttpRequest } from '@/web-controllers/ports'
 import { Request, Response } from 'express'
-import { RegisterUserController } from '@/web-controllers/'
+import { RegisterAndSendEmailController } from '@/web-controllers/'
 
-export const adptRoute = (controller: RegisterUserController) => {
+export const adptRoute = (controller: RegisterAndSendEmailController) => {
   return async (req: Request, res: Response) => {
     const HttpRequest: HttpRequest = {
       body: req.body
