@@ -5,7 +5,7 @@ import { UserData } from '@/entities'
 import { HttpRequest, HttpResponse } from '@/web-controllers/ports'
 import { badRequest, created } from '@/web-controllers/util'
 
-export class RegisterUserController {
+export class RegisterAndSendEmailController {
   private readonly usecase: UseCase
 
   constructor (usecase: UseCase) {
