@@ -1,9 +1,10 @@
+import { ok } from './util/http-helper'
 import { serverError } from '@/web-controllers/util/http-helper'
 import { UseCase } from '@/usecases/ports'
 import { MissingParamError } from '@/web-controllers/errors/missing-param-error'
 import { UserData } from '@/entities'
 import { HttpRequest, HttpResponse } from '@/web-controllers/ports'
-import { badRequest, created } from '@/web-controllers/util'
+import { badRequest } from '@/web-controllers/util'
 
 export class RegisterAndSendEmailController {
   private readonly usecase: UseCase
@@ -27,7 +28,7 @@ export class RegisterAndSendEmailController {
         return badRequest(response.value)
       }
 
-      return created(response.value)
+      return ok(response.value)
     } catch (error) {
       return serverError(error)
     }
